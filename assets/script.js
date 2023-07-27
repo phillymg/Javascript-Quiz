@@ -1,89 +1,76 @@
-// Questions that will be asked
-const Questions = [{
-    q: "What is capital of India?",
-    a: [{ text: "Gandhinagar", isCorrect: false },
-    { text: "Surat", isCorrect: false },
-    { text: "Delhi", isCorrect: true },
-    { text: "Mumbai", isCorrect: false }
-    ]
-
-},
-{
-    q: "What is the capital of Thailand?",
-    a: [{ text: "Lampang", isCorrect: false, isSelected: false },
-    { text: "Phuket", isCorrect: false },
-    { text: "Ayutthaya", isCorrect: false },
-    { text: "Bangkok", isCorrect: true }
-    ]
-
-},
-{
-    q: "What is the capital of Gujarat",
-    a: [{ text: "Surat", isCorrect: false },
-    { text: "Vadodara", isCorrect: false },
-    { text: "Gandhinagar", isCorrect: true },
-    { text: "Rajkot", isCorrect: false }
-    ]
-
-}
-
+var introSectionEl = document.getElementById("intro");
+var quizSectionEl = document.getElementById("quiz");
+var countdown = 60
+var timeLeft = document.getElementById("current-time");
+var setInt;
+var questionIndex = 0
+//document.getElementById("choice")=
+var questions = [
+    {
+        title: "Question 1",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice2"
+    },
+    {
+        title: "Question 2",
+        choices: [
+            "Choice2.1", "Choice2.2", "Choice2.3", "Choice2.4"
+        ],
+        answer: "Choice3"
+    },
+    {
+        title: "Question 3",
+        choices: [
+            "Choice3.1", "Choice3.2", "Choice3.3", "Choice3.4"
+        ],
+        answer: "Choice3"
+    }
 ]
 
-let currQuestion = 0
-let score = 0
-
-function loadQues() {
-    const question = document.getElementById("ques")
-    const opt = document.getElementById("opt")
-
-    question.textContent = Questions[currQuestion].q;
-    opt.innerHTML = ""
-
-    for (let i = 0; i < Questions[currQuestion].a.length; i++) {
-        const choicesdiv = document.createElement("div");
-        const choice = document.createElement("input");
-        const choiceLabel = document.createElement("label");
-
-        choice.type = "radio";
-        choice.name = "answer";
-        choice.value = i;
-
-        choiceLabel.textContent = Questions[currQuestion].a[i].text;
-
-        choicesdiv.appendChild(choice);
-        choicesdiv.appendChild(choiceLabel);
-        opt.appendChild(choicesdiv);
-    }
+function startQuiz() {
+    introSectionEl.style.display = "none";
+    quizSectionEl.style.display = "block";
+    timer();
+    displayQuestion();
+    displayChoices();
 }
 
-loadQues();
+function timer() {
+    setInt = setInterval(function () {
+        timeLeft.textContent = countdown;
+        countdown--;
+        if (countdown === 0) {
+            clearInterval(setInt);
+        }
+    }, 1000)
+}
 
-function loadScore() {
-    const totalScore = document.getElementById("score")
-    totalScore.textContent = `You scored ${score} out of ${Questions.length}`
+//When I click an option, the quiz will continue on to the next question and display either "Correct" or "Incorrect at the bottom"
+
+
+function displayQuestion() {
+    document.getElementById("question").textContent = questions[questionIndex].title
+}
+
+function displayChoices() {
+    document.getElementById("choice-1").textContent = questions[questionIndex].choices[0]
+    document.getElementById("choice-2").textContent = questions[questionIndex].choices[1]
+    document.getElementById("choice-3").textContent = questions[questionIndex].choices[2]
+    document.getElementById("choice-4").textContent = questions[questionIndex].choices[3]
+
+}
+
+function doSubmit() {
+    questionIndex++
+    //hide the current question and display the next question
+    displayQuestion();
+    displayChoices();
 }
 
 
-function nextQuestion() {
-    if (currQuestion < Questions.length - 1) {
-        currQuestion++;
-        loadQues();
-    } else {
-        document.getElementById("opt").remove()
-        document.getElementById("ques").remove()
-        document.getElementById("btn").remove()
-        loadScore();
-    }
-}
 
-function checkAns() {
-    const selectedAns = parseInt(document.querySelector('input[name="answer"]:checked').value);
+document.getElementById("start-btn").addEventListener("click", startQuiz);
 
-    if (Questions[currQuestion].a[selectedAns].isCorrect) {
-        score++;
-        console.log("Correct")
-        nextQuestion();
-    } else {
-        nextQuestion();
-    }
-}
+document.getElementById("submit-btn").addEventListener("click", doSubmit);

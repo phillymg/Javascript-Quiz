@@ -10,7 +10,33 @@
 </head>
 
 <body>
-    <script src="./assets/script.js"></script>
+    <header>
+        <div>
+            Time: <span id="current-time">
+            </span>
+        </div>
+    </header>
+    <!-- Create Starting Page -->
+    <section id="intro">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Try to answer the as the following questions within the given time limit. Please note, every wrong answer
+            will subtract 10 seconds from your time remaining.</p>
+        <button id="start-btn">Start</button>
+    </section>
+    <!-- Create Question/Answer section -->
+    <section id="quiz">
+        <div id="question">Question goes here</div>
+        <div id="choice">
+            <ul>
+                <button class="option" id="choice-1">1</button>
+                <button class="option" id="choice-2">2</button>
+                <button class="option" id="choice-3">3</button>
+                <button class="option" id="choice-4">4</button>
+            </ul>
+        </div>
+        <button id="submit-btn">Submit</button>
+    </section>
+    <script src=" ./assets/script.js"></script>
 </body>
 
 </html>
