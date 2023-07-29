@@ -4,6 +4,10 @@ var countdown = 60
 var timeLeft = document.getElementById("current-time");
 var setInt;
 var questionIndex = 0
+var choiceContainer = document.querySelector("#choice");
+var scoreIndex = 0;
+var currentScore = document.querySelector("#currentscore");
+var quizOverSectionEl = document.getElementById("quizover");
 //document.getElementById("choice")=
 var questions = [
     {
@@ -16,16 +20,72 @@ var questions = [
     {
         title: "Question 2",
         choices: [
-            "Choice2.1", "Choice2.2", "Choice2.3", "Choice2.4"
+            "Choice1", "Choice2", "Choice3", "Choice4"
         ],
         answer: "Choice3"
     },
     {
         title: "Question 3",
         choices: [
-            "Choice3.1", "Choice3.2", "Choice3.3", "Choice3.4"
+            "Choice1", "Choice2", "Choice3", "Choice4"
         ],
-        answer: "Choice3"
+        answer: "Choice4"
+    },
+    {
+        title: "Question 4",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 5",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 6",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 7",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 8",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 9",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 10",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
+    },
+    {
+        title: "Question 11",
+        choices: [
+            "Choice1", "Choice2", "Choice3", "Choice4"
+        ],
+        answer: "Choice4"
     }
 ]
 
@@ -41,13 +101,12 @@ function timer() {
     setInt = setInterval(function () {
         timeLeft.textContent = countdown;
         countdown--;
-        if (countdown === 0) {
+        if (countdown <= 0) {
             clearInterval(setInt);
         }
+
     }, 1000)
 }
-
-//When I click an option, the quiz will continue on to the next question and display either "Correct" or "Incorrect at the bottom"
 
 
 function displayQuestion() {
@@ -63,14 +122,41 @@ function displayChoices() {
 }
 
 function doSubmit() {
-    questionIndex++
+    //questionIndex++
     //hide the current question and display the next question
     displayQuestion();
     displayChoices();
 }
 
 
+choiceContainer.addEventListener("click", (e) => {
+    //When I click an option, I want to read the text content to see if it matches the answer property from the questions array
+    console.log(e.target.id, questionIndex);
+    if (e.target.tagName !== "BUTTON") {
+        return
+    }
+    let optionText = e.target.textContent
+    //console.log(optionText)
+    if (optionText === questions[questionIndex].answer) {
+        scoreIndex++
+        currentScore.textContent = scoreIndex
+
+    } else {
+        if (countdown <= 9) {
+            countdown -= countdown
+        } else {
+            countdown -= 10
+        }
+    };
+    questionIndex++
+    doSubmit();
+})
 
 document.getElementById("start-btn").addEventListener("click", startQuiz);
 
-document.getElementById("submit-btn").addEventListener("click", doSubmit);
+function quizComplete() {
+    quizSectionEl.style.display = "none";
+    quizOverSectionEl.style.display = "block";
+}
+
+if (countdown === 0 || )
