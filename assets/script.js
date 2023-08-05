@@ -8,42 +8,45 @@ var choiceContainer = document.querySelector("#choice");
 var scoreIndex = 0;
 var currentScore = document.querySelector("#currentscore");
 var quizOverSectionEl = document.getElementById("quizover");
+var finalScore = document.querySelector("#finalscore")
+var scoreListEl = document.querySelector("#scorelist")
+var submitInitials = document.getElementById("submitinitials");
 //document.getElementById("choice")=
 var questions = [
     {
-        title: "Question 1",
+        title: "How do you refer to the following <div> element with an id of 'practiceid'? ",
         choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
+            "document.querySelector('.practiceid')", "func selectID {practiceid}", "document.querySelector('#practiceid')", "document.getElementById('practid')"
         ],
-        answer: "Choice2"
+        answer: "document.querySelector('#practiceid')"
     },
     {
-        title: "Question 2",
+        title: "Where do you link a javascript file to your HTML?",
         choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
+            "Right above the CSS file in the <head> element", "Beneath all your code in the <body>", "Right below the CSS file in the <head> element", "You don't"
         ],
-        answer: "Choice3"
+        answer: "Beneath all your code in the <body>"
     },
     {
-        title: "Question 3",
+        title: "What should you use to equate two variables with the same value but different type?",
         choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
+            "===", "==", "=", "<="
         ],
-        answer: "Choice4"
+        answer: "=="
     },
     {
-        title: "Question 4",
+        title: "Which keyword refers to an object that is executing the current piece of code?",
         choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
+            "this", "those", "that", "these"
         ],
-        answer: "Choice4"
+        answer: "this"
     },
     {
-        title: "Question 5",
+        title: "What should one use to check if an element is within another element?",
         choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
+            "includes() method", "isInside() method", "isWithin() method", "contains() method",
         ],
-        answer: "Choice4"
+        answer: "contains() method"
     },
     {
         title: "Question 6",
@@ -80,14 +83,8 @@ var questions = [
         ],
         answer: "Choice4"
     },
-    {
-        title: "Question 11",
-        choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
-        ],
-        answer: "Choice4"
-    }
 ]
+
 
 function startQuiz() {
     introSectionEl.style.display = "none";
@@ -97,12 +94,18 @@ function startQuiz() {
     displayChoices();
 }
 
+// quizOverSectionEl.style.display = "none";
+// scoreListEl.style.display = "none";
+
+
 function timer() {
     setInt = setInterval(function () {
         timeLeft.textContent = countdown;
         countdown--;
-        if (countdown <= 0) {
+
+        if (countdown <= 0 || questionIndex === questions.length) {
             clearInterval(setInt);
+            quizComplete();
         }
 
     }, 1000)
@@ -157,6 +160,47 @@ document.getElementById("start-btn").addEventListener("click", startQuiz);
 function quizComplete() {
     quizSectionEl.style.display = "none";
     quizOverSectionEl.style.display = "block";
+    finalScore.innerHTML = ("You scored ") + currentScore.innerHTML + (" points!");
 }
 
-if (countdown === 0 || )
+function displayScores() {
+    console.log("test")
+}
+
+submitInitials.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const formData = new FormData(submitInitials)
+
+    const score = {
+        initials: formData.get("initials"),
+        points: scoreIndex
+    }
+    saveScoreToStorage(score)
+});
+
+function saveScoreToStorage(score) {
+    // read
+    const scoresFromStorage = JSON.parse(localStorage.getItem("quiz scores"));
+    let scoreEntryArray;
+
+    // modify
+    if (!scoresFromStorage || scoresFromStorage.length === 0) {
+        scoreEntryArray = [score]
+    } else {
+        scoreEntryArray = [...scoresFromStorage, score]
+    }
+
+    // write
+    localStorage.setItem("quiz scores", JSON.stringify(scoreEntryArray));
+
+}
+// "[
+//     {
+//         initials: 'ab',
+//         points: 3
+//     },
+//     {
+//     ..
+// },
+//     {}
+// ]"

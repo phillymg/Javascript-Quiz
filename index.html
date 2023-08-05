@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css">
-    <title>Document</title>
+    <title>Javascript Quiz</title>
 </head>
 
 <body>
@@ -34,9 +34,20 @@
                 <button class="option" id="choice-4">4</button>
             </ul>
         </div>
+        <div id="currentscore"></div>
+
     </section>
     <section id="quizover">
-        <div id="currentscore"></div>
+        <h2>Game Over!</h2>
+        <div id="finalscore"></div>
+        <form id="submitinitials"><input type="text" placeholder="Your Initials" name="initials" />
+            <button type="submit" id="savescorebtn">Save your score</button>
+        </form>
+    </section>
+    <section id="scorelist">
+        <ol id="scoreboard">
+
+        </ol>
     </section>
     <script src=" ./assets/script.js"></script>
 </body>
