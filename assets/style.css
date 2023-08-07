@@ -1,3 +1,97 @@
 #quiz {
     display: none;
 }
+
+li {
+    margin: 10px;
+    list-style-type: none;
+
+}
+
+body {
+    background-color: rgba(128, 0, 255, 0.885);
+}
+
+#intro,
+#quiz {
+    color: white;
+    margin-top: 10%;
+}
+
+* {
+    text-align: center;
+}
+
+#start-btn {
+    display: block;
+    width: 50%;
+    border: none;
+    background-color: #ffffff;
+    padding: 14px 28px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: 25%;
+    color: rgba(128, 0, 255, 0.885);
+
+}
+
+.option {
+    width: 500px;
+}
+
+#intro h1 {
+    margin-bottom: 100px;
+    color: rgba(128, 0, 255, 0.885);
+
+}
+
+#intro p {
+    margin-bottom: 100px;
+}
+
+#intro div {
+    width: 50%;
+    margin-left: 25%;
+}
+
+#question {
+    font-size: 25px;
+}
+
+li button,
+#savescorebtn,
+input {
+    border: none;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 7px;
+
+}
+
+li button:hover,
+#savescorebtn:hover {
+    background-color: rgba(227, 214, 241, 0.592);
+}
+
+#start-btn:hover {
+    background-color: rgba(222, 168, 255, 0.822);
+}
+
+#timerdisplay {
+    margin-top: 10px;
+    color: black;
+    width: 10%;
+    background-color: white;
+    border-radius: 20px;
+    margin-left: 45%;
+    font-size: 20px;
+}
+
+#quizover {
+    margin-top: 90px;
+}
+
+#finalscore {
+    font-size: 20px;
+}

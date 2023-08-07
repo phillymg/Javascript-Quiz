@@ -1,6 +1,6 @@
 var introSectionEl = document.getElementById("intro");
 var quizSectionEl = document.getElementById("quiz");
-var countdown = 60
+var countdown = 59
 var timeLeft = document.getElementById("current-time");
 var setInt;
 var questionIndex = 0
@@ -11,10 +11,11 @@ var quizOverSectionEl = document.getElementById("quizover");
 var finalScore = document.querySelector("#finalscore")
 var scoreListEl = document.querySelector("#scorelist")
 var submitInitials = document.getElementById("submitinitials");
+var timerDipslay = document.getElementById("timerdisplay");
 //document.getElementById("choice")=
 var questions = [
     {
-        title: "How do you refer to the following <div> element with an id of 'practiceid'? ",
+        title: "How do you refer to a <div> element with an id of 'practiceid'? ",
         choices: [
             "document.querySelector('.practiceid')", "func selectID {practiceid}", "document.querySelector('#practiceid')", "document.getElementById('practid')"
         ],
@@ -89,13 +90,16 @@ var questions = [
 function startQuiz() {
     introSectionEl.style.display = "none";
     quizSectionEl.style.display = "block";
+    timerDipslay.style.display = "block";
+
     timer();
     displayQuestion();
     displayChoices();
 }
 
-// quizOverSectionEl.style.display = "none";
+quizOverSectionEl.style.display = "none";
 // scoreListEl.style.display = "none";
+timerDipslay.style.display = "none";
 
 
 function timer() {
@@ -160,7 +164,7 @@ document.getElementById("start-btn").addEventListener("click", startQuiz);
 function quizComplete() {
     quizSectionEl.style.display = "none";
     quizOverSectionEl.style.display = "block";
-    finalScore.innerHTML = ("You scored ") + currentScore.innerHTML + (" points!");
+    finalScore.innerHTML = ("Final score: ") + currentScore.innerHTML;
 }
 
 function displayScores() {
@@ -178,10 +182,12 @@ submitInitials.addEventListener("submit", (e) => {
     saveScoreToStorage(score)
 });
 
+
+
 function saveScoreToStorage(score) {
     // read
-    const scoresFromStorage = JSON.parse(localStorage.getItem("quiz scores"));
     let scoreEntryArray;
+    const scoresFromStorage = JSON.parse(localStorage.getItem("quiz-scores"));
 
     // modify
     if (!scoresFromStorage || scoresFromStorage.length === 0) {
@@ -191,16 +197,12 @@ function saveScoreToStorage(score) {
     }
 
     // write
-    localStorage.setItem("quiz scores", JSON.stringify(scoreEntryArray));
-
+    localStorage.setItem("quiz-scores", JSON.stringify(scoreEntryArray));
 }
-// "[
-//     {
-//         initials: 'ab',
-//         points: 3
-//     },
-//     {
-//     ..
-// },
-//     {}
-// ]"
+
+var userData = JSON.parse(localStorage.getItem("quiz-scores"));
+
+for (i = 0; i < userData.length; i++) {
+    console.log((userData[i]).initials);
+    console.log((userData[i]).points);
+}
