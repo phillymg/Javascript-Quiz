@@ -12,6 +12,8 @@ var finalScore = document.querySelector("#finalscore")
 var scoreListEl = document.querySelector("#scorelist")
 var submitInitials = document.getElementById("submitinitials");
 var timerDipslay = document.getElementById("timerdisplay");
+var scoreBoardEl = document.getElementById("scorelist");
+var restartButton = document.getElementById("restartbtn");
 //document.getElementById("choice")=
 var questions = [
     {
@@ -100,21 +102,20 @@ function startQuiz() {
 quizOverSectionEl.style.display = "none";
 // scoreListEl.style.display = "none";
 timerDipslay.style.display = "none";
-
+scoreBoardEl.style.display = "none";
 
 function timer() {
     setInt = setInterval(function () {
         timeLeft.textContent = countdown;
         countdown--;
 
-        if (countdown <= 0 || questionIndex === questions.length) {
+        if (countdown <= 0) {
             clearInterval(setInt);
             quizComplete();
         }
 
     }, 1000)
 }
-
 
 function displayQuestion() {
     document.getElementById("question").textContent = questions[questionIndex].title
@@ -136,6 +137,7 @@ function doSubmit() {
 }
 
 
+
 choiceContainer.addEventListener("click", (e) => {
     //When I click an option, I want to read the text content to see if it matches the answer property from the questions array
     console.log(e.target.id, questionIndex);
@@ -150,12 +152,17 @@ choiceContainer.addEventListener("click", (e) => {
 
     } else {
         if (countdown <= 9) {
-            countdown -= countdown
+            countdown -= countdown;
         } else {
             countdown -= 10
         }
     };
-    questionIndex++
+    if (questionIndex === 9) {
+        clearInterval(setInt);
+        quizComplete();
+        return;
+    }
+    questionIndex++;
     doSubmit();
 })
 
@@ -173,16 +180,18 @@ function displayScores() {
 
 submitInitials.addEventListener("submit", (e) => {
     e.preventDefault()
-    const formData = new FormData(submitInitials)
+    const formData = new FormData(submitInitials);
 
     const score = {
         initials: formData.get("initials"),
         points: scoreIndex
     }
-    saveScoreToStorage(score)
+    saveScoreToStorage(score);
+    quizOverSectionEl.style.display = "none";
+    timerDipslay.style.display = "none";
+
+    scoreBoardEl.style.display = "block";
 });
-
-
 
 function saveScoreToStorage(score) {
     // read
@@ -198,11 +207,23 @@ function saveScoreToStorage(score) {
 
     // write
     localStorage.setItem("quiz-scores", JSON.stringify(scoreEntryArray));
+    // console.log(scoresFromStorage);
+    const table = document.getElementById("scoreboard");
+    scoreEntryArray.sort((a, b) => b.points - a.points);
+    for (i = 0; i < 10; i++) {
+        // console.log((scoresFromStorage[i]).initials);
+        // console.log((scoresFromStorage[i]).points);
+        let Tr = document.createElement("tr");
+        let TdInit = document.createElement("td");
+        let TdScore = document.createElement("td");
+
+        Tr.append(TdInit, TdScore);
+        TdInit.textContent = scoreEntryArray[i].initials;
+        TdScore.textContent = scoreEntryArray[i].points;
+        table.append(Tr);
+    }
 }
 
-var userData = JSON.parse(localStorage.getItem("quiz-scores"));
-
-for (i = 0; i < userData.length; i++) {
-    console.log((userData[i]).initials);
-    console.log((userData[i]).points);
-}
+restartButton.addEventListener("click", (e) => {
+    location.reload()
+})

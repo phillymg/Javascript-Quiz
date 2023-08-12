@@ -61,7 +61,8 @@ body {
 
 li button,
 #savescorebtn,
-input {
+input,
+#restartbtn {
     border: none;
     height: 40px;
     font-size: 20px;
@@ -70,7 +71,8 @@ input {
 }
 
 li button:hover,
-#savescorebtn:hover {
+#savescorebtn:hover,
+#restartbtn:hover {
     background-color: rgba(227, 214, 241, 0.592);
 }
 
@@ -94,4 +96,22 @@ li button:hover,
 
 #finalscore {
     font-size: 20px;
+}
+
+#scorelist {
+    margin-left: 25%;
+    margin-top: 10%;
+    color: #ffffff;
+    max-width: 50%;
+}
+
+th,
+td {
+    border-style: solid;
+    border-color: #ffffff;
+}
+
+#restartbtn {
+    background-color: white;
+    margin-top: 10px;
 }

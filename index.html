@@ -38,6 +38,7 @@
                 <li><button class="option" id="choice-4">4</button></li>
             </ul>
         </div>
+        <p>Current Score: </p>
         <div id="currentscore"></div>
 
     </section>
@@ -49,11 +50,17 @@
             <button type="submit" id="savescorebtn">Save your score</button>
         </form>
     </section>
-    <section id="scorelist">
-        <ol id="scoreboard">
+    <section id="scorelist" class="align-items-center">
+        <table id="scoreboard" class="col">
+            <tr>
+                <th>Initials</th>
+                <th>Score</th>
+            </tr>
+        </table>
+        <button id="restartbtn">$3 per attempt</button>
 
-        </ol>
     </section>
+
     <script src=" ./assets/script.js"></script>
 </body>
 
