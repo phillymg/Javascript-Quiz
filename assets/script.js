@@ -100,7 +100,6 @@ function startQuiz() {
 }
 
 quizOverSectionEl.style.display = "none";
-// scoreListEl.style.display = "none";
 timerDipslay.style.display = "none";
 scoreBoardEl.style.display = "none";
 
@@ -178,6 +177,40 @@ function displayScores() {
     console.log("test")
 }
 
+
+
+function saveScoreToStorage(score) {
+    // read
+    let scoreEntryArray;
+    const scoresFromStorage = JSON.parse(localStorage.getItem("quiz-scores"));
+
+    // modify
+    if (!scoresFromStorage || scoresFromStorage.length === 0) {
+        scoreEntryArray = [score]
+    } else {
+        scoreEntryArray = [...scoresFromStorage, score]
+    }
+    // write
+    localStorage.setItem("quiz-scores", JSON.stringify(scoreEntryArray));
+    const table = document.getElementById("scoreboard");
+    scoreEntryArray.sort((a, b) => b.points - a.points);
+    for (let i = 0; i < 10; i++) {
+        if (!scoreEntryArray[i]) {
+            return;
+        }
+
+        let Tr = document.createElement("tr");
+        let TdInit = document.createElement("td");
+        let TdScore = document.createElement("td");
+
+        Tr.append(TdInit, TdScore);
+        TdInit.textContent = scoreEntryArray[i].initials;
+        TdScore.textContent = scoreEntryArray[i].points;
+        table.append(Tr);
+    }
+
+}
+
 submitInitials.addEventListener("submit", (e) => {
     e.preventDefault()
     const formData = new FormData(submitInitials);
@@ -192,37 +225,6 @@ submitInitials.addEventListener("submit", (e) => {
 
     scoreBoardEl.style.display = "block";
 });
-
-function saveScoreToStorage(score) {
-    // read
-    let scoreEntryArray;
-    const scoresFromStorage = JSON.parse(localStorage.getItem("quiz-scores"));
-
-    // modify
-    if (!scoresFromStorage || scoresFromStorage.length === 0) {
-        scoreEntryArray = [score]
-    } else {
-        scoreEntryArray = [...scoresFromStorage, score]
-    }
-
-    // write
-    localStorage.setItem("quiz-scores", JSON.stringify(scoreEntryArray));
-    // console.log(scoresFromStorage);
-    const table = document.getElementById("scoreboard");
-    scoreEntryArray.sort((a, b) => b.points - a.points);
-    for (i = 0; i < 10; i++) {
-        // console.log((scoresFromStorage[i]).initials);
-        // console.log((scoresFromStorage[i]).points);
-        let Tr = document.createElement("tr");
-        let TdInit = document.createElement("td");
-        let TdScore = document.createElement("td");
-
-        Tr.append(TdInit, TdScore);
-        TdInit.textContent = scoreEntryArray[i].initials;
-        TdScore.textContent = scoreEntryArray[i].points;
-        table.append(Tr);
-    }
-}
 
 restartButton.addEventListener("click", (e) => {
     location.reload()
