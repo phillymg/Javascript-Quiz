@@ -9,6 +9,10 @@ This a quiz designed to test the user on their Javascript knowledge, and allows 
 
 ![Quizscreenshot](https://github.com/phillymg/Javascript-Quiz/assets/131498400/7f39f182-5ef7-4417-a36a-91384bd6c50e)
 
+## Deploy
+
+https://phillymg.github.io/Javascript-Quiz/
+
 ## License
 
 Copyright 8/15/23 Phillip Guetterman
