@@ -7,7 +7,7 @@ This a quiz designed to test the user on their Javascript knowledge, and allows 
 
 ## Acceptance Criteria
 
-!(/Users/phillipguetterman/bootcamp/Classwork/Java_Quiz/assets/Photos/Quizscreenshot.png)
+![Quizscreenshot](https://github.com/phillymg/Javascript-Quiz/assets/131498400/7f39f182-5ef7-4417-a36a-91384bd6c50e)
 
 ## License
 
