@@ -70,6 +70,10 @@ input,
 
 }
 
+li button {
+    background-color: white;
+}
+
 li button:hover,
 #savescorebtn:hover,
 #restartbtn:hover {
@@ -108,7 +112,7 @@ li button:hover,
 th,
 td {
     border-style: solid;
-    border-color: white;
+    border-color: #ffffff;
 }
 
 #restartbtn {
