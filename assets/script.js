@@ -52,40 +52,13 @@ var questions = [
         answer: "contains() method"
     },
     {
-        title: "Question 6",
+        title: "Which of the following is a primitive data type?",
         choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
+            "Boolean", "String", "Class", "Array"
         ],
-        answer: "Choice4"
+        answer: "Boolean"
     },
-    {
-        title: "Question 7",
-        choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
-        ],
-        answer: "Choice4"
-    },
-    {
-        title: "Question 8",
-        choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
-        ],
-        answer: "Choice4"
-    },
-    {
-        title: "Question 9",
-        choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
-        ],
-        answer: "Choice4"
-    },
-    {
-        title: "Question 10",
-        choices: [
-            "Choice1", "Choice2", "Choice3", "Choice4"
-        ],
-        answer: "Choice4"
-    },
+
 ]
 
 
@@ -156,7 +129,7 @@ choiceContainer.addEventListener("click", (e) => {
             countdown -= 10
         }
     };
-    if (questionIndex === 9) {
+    if (questionIndex === 5) {
         clearInterval(setInt);
         quizComplete();
         return;
