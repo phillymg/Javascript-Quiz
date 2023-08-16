@@ -2,10 +2,10 @@
 
 ## Description
 
-This a quiz designed to test the user on their Javascript knowledge, and allows them to track high scores.
+This a quiz designed to test the user on their Javascript knowledge, and allows them to track high scores. Every wrong answer subtracts 10 seconds from the timer, which starts at 60 seconds.
 
 
-## Acceptance Criteria
+## Image of Application
 
 ![Quizscreenshot](https://github.com/phillymg/Javascript-Quiz/assets/131498400/7f39f182-5ef7-4417-a36a-91384bd6c50e)
 
